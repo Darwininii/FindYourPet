@@ -4,30 +4,24 @@
 
 :root {
   --foreground: #171717;
-  --background: #ffffff; 
-  --gradient-background: linear-gradient(
-    to right,
-    #43c6ac,
-    #191654
-  ); 
+  --background: #ffffff;
+  --gradient-background: linear-gradient(to right, #43c6ac, #191654);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --gradient-background: linear-gradient(
-      to right,
-      #43c6ac,
-      #191654
-    ); 
+    --gradient-background: linear-gradient(to right, #43c6ac, #191654);
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(
-    --gradient-background
-  );
+  background: var(--gradient-background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
