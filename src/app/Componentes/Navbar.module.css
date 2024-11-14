@@ -44,3 +44,17 @@
 .navLinks a:hover {
   color: #43c6ac;
 }
+
+.donacionButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.donacionButton:hover {
+  background-color: #45a049;
+}

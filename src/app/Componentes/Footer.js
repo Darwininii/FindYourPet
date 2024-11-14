@@ -4,19 +4,16 @@ export default function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
-        {/* Logo */}
         <div className="mb-6 md:mb-0">
           <img
             src="/logo.png"
             alt="Logo de la empresa"
-            className="h-20 w-20 rounded-full" // Añade 'rounded-full' para hacerla redonda
+            className="h-20 w-20 rounded-full"
           />
         </div>
 
-        {/* Secciones de Enlaces */}
         <div className="text-center mb-6 md:mb-0">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {/* Compañía */}
             <div>
               <h3 className="font-semibold text-lg mb-2">Compañía</h3>
               <ul className="space-y-1">
@@ -43,7 +40,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Comunidad */}
             <div>
               <h3 className="font-semibold text-lg mb-2">Comunidad</h3>
               <ul className="space-y-1">
@@ -65,7 +61,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Enlaces Útiles */}
             <div>
               <h3 className="font-semibold text-lg mb-2">Enlaces Útiles</h3>
               <ul className="space-y-1">
@@ -92,7 +87,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Apóyanos */}
             <div>
               <h3 className="font-semibold text-lg mb-2">Apóyanos</h3>
               <ul className="space-y-1">
@@ -116,7 +110,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Redes Sociales */}
         <div className="flex space-x-4">
           <a
             href="https://www.facebook.com"
@@ -144,7 +137,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Derechos Reservados */}
       <div className="mt-8 text-center">
         <p>&copy; 2024 Find Your Pet. Todos los derechos reservados.</p>
       </div>
