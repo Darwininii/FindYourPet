@@ -1,86 +1,8 @@
-/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/Componentes/Navbar.module.css ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************/
-.Navbar_navbar__65a2r {
-  width: 100%;
-  background: #43c6ac;
-  background: -webkit-linear-gradient(to right, #43c6ac, #191654);
-  background: linear-gradient(to right, #43c6ac, #191654);
-  color: #fff;
-  padding: 1rem 0;
-  height: 110px;
-  border: black;
-}
-
-.Navbar_navContent__4awUg {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.Navbar_logo__vUnrF a {
-  color: #fff;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.Navbar_logo__vUnrF img {
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.Navbar_navLinks__qkGOj {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.Navbar_navLinks__qkGOj a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.Navbar_navLinks__qkGOj a:hover {
-  color: #43c6ac;
-}
-
-.Navbar_donacionButton__RaOOK {
-  background-color: #4caf50;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.Navbar_donacionButton__RaOOK:hover {
-  background-color: #45a049;
-}
-
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/Componentes/Contenedor.module.css ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
-.Contenedor_contenedor__C9bmY {
-  width: 100%;
-  max-width: 1200px;
-  min-height: 600px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/Componentes/Boton.module.css ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/Componentes/Boton.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
 /* Boton.module.css */
-.Boton_button__AaShL {
+.Boton_button__NpT62 {
   height: 50px;
   width: 100%; /* Asegura que el botón ocupe todo el ancho del contenedor */
   border: none;
@@ -91,11 +13,11 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Boton_button__AaShL:hover {
+.Boton_button__NpT62:hover {
   box-shadow: 0.5px 0.5px 150px #252525;
 }
 
-.Boton_type1__CwslT::after {
+.Boton_type1__YeG5b::after {
   content: "Gracias";
   height: 50px;
   width: 100%; /* Ajuste para que coincida con el tamaño del botón */
@@ -113,7 +35,7 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Boton_type1__CwslT::before {
+.Boton_type1__YeG5b::before {
   content: "Donar";
   height: 50px;
   width: 100%; /* Ajuste para que coincida con el tamaño del botón */
@@ -131,19 +53,19 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Boton_type1__CwslT:hover::after {
+.Boton_type1__YeG5b:hover::after {
   transform: translateY(0) scale(1.2);
 }
 
-.Boton_type1__CwslT:hover::before {
+.Boton_type1__YeG5b:hover::before {
   transform: translateY(-50px) scale(0) rotate(120deg);
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/Componentes/Donaciones.module.css ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/Componentes/Donaciones.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
 /* Donaciones.module.css */
-.Donaciones_donationContainer__qVJxX {
+.Donaciones_donationContainer___mVrl {
   text-align: center;
   max-width: 600px; /* Asegúrate de que este max-width esté definido para que se ajuste */
   margin: 0 auto;
@@ -158,24 +80,24 @@
   text-align: left;
 }
 
-.Donaciones_donationContainer__qVJxX h2 {
+.Donaciones_donationContainer___mVrl h2 {
   font-size: 24px;
   color: black;
   margin-bottom: 10px;
 }
 
-.Donaciones_donationContainer__qVJxX p {
+.Donaciones_donationContainer___mVrl p {
   color: white;
 }
 
-.Donaciones_amountOptions__Zn562 {
+.Donaciones_amountOptions__HHfA2 {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin: 20px 0;
 }
 
-.Donaciones_amountOptions__Zn562 button {
+.Donaciones_amountOptions__HHfA2 button {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4caf50;
@@ -185,11 +107,11 @@
   cursor: pointer;
 }
 
-.Donaciones_amountOptions__Zn562 button:hover {
+.Donaciones_amountOptions__HHfA2 button:hover {
   background-color: #45a049;
 }
 
-.Donaciones_customInput__jNeM_ {
+.Donaciones_customInput__d8acD {
   padding: 10px;
   width: 100%;
   margin: 10px 0;
@@ -199,7 +121,7 @@
 }
 
 /* Estilo del botón de donación */
-.Donaciones_donateButton__bvCyY {
+.Donaciones_donateButton__GUbyk {
   padding: 12px 20px;
   font-size: 18px;
   background-color: #2196f3;
@@ -207,17 +129,17 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+  width: 100%;
 }
 
-.Donaciones_donateButton__bvCyY:hover {
+.Donaciones_donateButton__GUbyk:hover {
   background-color: #0b7dda;
 }
 
 /* Estilo para el botón con animación */
-.Donaciones_button__lKxTe {
+.Donaciones_button__nzuhX {
   height: 50px;
-  width: 100%; /* Asegura que el botón ocupe el 100% del contenedor */
+  width: 100%;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -226,14 +148,14 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Donaciones_button__lKxTe:hover {
+.Donaciones_button__nzuhX:hover {
   box-shadow: 0.5px 0.5px 150px #252525;
 }
 
-.Donaciones_type1__7xJcT::after {
+.Donaciones_type1__XTwTh::after {
   content: "Gracias";
   height: 50px;
-  width: 100%; /* Ajuste para que coincida con el tamaño del botón */
+  width: 100%;
   background-color: #008080;
   color: #fff;
   position: absolute;
@@ -248,10 +170,10 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Donaciones_type1__7xJcT::before {
+.Donaciones_type1__XTwTh::before {
   content: "Donar";
   height: 50px;
-  width: 100%; /* Ajuste para que coincida con el tamaño del botón */
+  width: 100%;
   background-color: #fff;
   color: #008080;
   position: absolute;
@@ -266,11 +188,11 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Donaciones_type1__7xJcT:hover::after {
+.Donaciones_type1__XTwTh:hover::after {
   transform: translateY(0) scale(1.2);
 }
 
-.Donaciones_type1__7xJcT:hover::before {
+.Donaciones_type1__XTwTh:hover::before {
   transform: translateY(-50px) scale(0) rotate(120deg);
 }
 
