@@ -3,8 +3,15 @@
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContent}>
@@ -16,7 +23,18 @@ const Navbar = () => {
             alt="Imagen de mascotas SVG"
           />
         </div>
-        <ul className={styles.navLinks}>
+        <button
+          className={styles.menuButton}
+          onClick={toggleMenu}
+          aria-label="Abrir menú"
+        >
+          <Image src="/menu.svg" width={30} height={30} alt="Menú" />
+        </button>
+        <ul
+          className={`${styles.navLinks} ${
+            isMenuOpen ? styles.navLinksOpen : styles.navLinksHidden
+          }`}
+        >
           <li>
             <Link href="/">Inicio</Link>
           </li>
@@ -27,9 +45,6 @@ const Navbar = () => {
             <Link href="/Mapa">Mapa</Link>
           </li>
           <li>
-            <Link href="#">|</Link>
-          </li>
-          <li>
             <Link href="/iniciar-sesion">Iniciar Sesión</Link>
           </li>
           <li>
@@ -37,9 +52,6 @@ const Navbar = () => {
           </li>
           <li>
             <Link href="/ayuda">Ayuda</Link>
-          </li>
-          <li>
-            <Link href="#">|</Link>
           </li>
           <li>
             <Link href="/Donacion">Donación</Link>
