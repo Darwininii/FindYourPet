@@ -827,7 +827,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* Necesario para el menú desplegable */
+  position: relative;
 }
 
 .Navbar_logo__i04Cp a {

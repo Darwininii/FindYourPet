@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* Necesario para el menú desplegable */
+  position: relative;
 }
 
 .logo a {
