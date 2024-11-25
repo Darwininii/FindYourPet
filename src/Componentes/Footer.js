@@ -80,7 +80,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/help" className="hover:underline">
+                  <a href="/Ayuda" className="hover:underline">
                     Centro de Ayuda
                   </a>
                 </li>
@@ -91,7 +91,7 @@ export default function Footer() {
               <h3 className="font-semibold text-lg mb-2">Apóyanos</h3>
               <ul className="space-y-1">
                 <li>
-                  <a href="/donate" className="hover:underline">
+                  <a href="/Donacion" className="hover:underline">
                     Donar
                   </a>
                 </li>

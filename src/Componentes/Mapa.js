@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Input from "./Input";
+import FormImg from "./FormImg";
+import Boton from "./Boton";
 
 const Mapa = () => {
   const mapRef = useRef(null); // Referencia para el mapa
@@ -97,43 +100,40 @@ const Mapa = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="styled-wrapper flex flex-col md:flex-row">
       {/* Formulario de búsqueda */}
-      <div className="flex flex-col space-y-2">
-        <input
-          type="text"
+      <div className="flex flex-col">
+        <Input
           placeholder="Dirección"
           value={direccion}
           onChange={(e) => setDireccion(e.target.value)}
-          className="border rounded p-2 text-black"
         />
-        <input
-          type="text"
+        <Input
           placeholder="Ciudad"
           value={ciudad}
           onChange={(e) => setCiudad(e.target.value)}
-          className="border rounded p-2 text-black"
         />
-        <input
-          type="text"
+        <Input
           placeholder="Barrio"
           value={barrio}
           onChange={(e) => setBarrio(e.target.value)}
-          className="border rounded p-2 text-black"
         />
-        <button
-          onClick={handleBuscar}
-          className="bg-blue-600 text-white rounded p-2 hover:bg-blue-500"
-        >
-          Buscar en el mapa
-        </button>
+        {/* Contenedor específico para el botón */}
+        <div className="flex justify-center">
+          <Boton text="Buscar" onClick={handleBuscar} />
+        </div>
       </div>
-
+      <FormImg />
       {/* Mapa */}
       <div
         ref={mapRef}
         className="flex-grow rounded border"
-        style={{ height: "400px", width: "700px" }}
+        style={{
+          height: "400px",
+          width: "700px",
+          border: "1px solid black",
+          borderRadius: "4px",
+        }}
       ></div>
     </div>
   );
