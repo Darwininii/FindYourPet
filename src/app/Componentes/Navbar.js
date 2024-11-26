@@ -4,6 +4,7 @@ import Image from "next/image";
 
 const Navbar = ({ onSectionChange }) => {
   return (
+    
     <nav className={styles.navbar}>
       <div className={styles.navContent}>
         <div className={styles.logo}>
@@ -43,9 +44,19 @@ const Navbar = ({ onSectionChange }) => {
             <Link href="#">Donación</Link>
           </li>
         </ul>
+        <nav className="bg-blue-600 text-white p-4">
+  <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <h1 className="text-xl font-bold">Mascotas Perdidas</h1>
+    <div>
+      <a href="/publicacion" className="px-4 py-2 bg-white text-blue-600 rounded-lg">Publicar</a>
+    </div>
+  </div>
+</nav>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+
+
