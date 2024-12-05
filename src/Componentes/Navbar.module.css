@@ -1,8 +1,5 @@
 .navbar {
   width: 100%;
-  background: #43c6ac;
-  background: -webkit-linear-gradient(to right, #43c6ac, #191654);
-  background: linear-gradient(to right, #43c6ac, #191654);
   color: #fff;
   padding: 1rem 0;
   height: 110px;
@@ -49,7 +46,7 @@
 }
 
 .navLinks a:hover {
-  color: #43c6ac;
+  color: black;
 }
 
 /* Botón de menú */
@@ -69,7 +66,6 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background: #191654;
     width: 100%;
     padding: 1rem 0;
     gap: 1rem;
