@@ -22,6 +22,7 @@ const Navbar = () => {
             height={80}
             alt="Imagen de mascotas SVG"
           />
+          {/* <h1>Find Your Pet</h1> */}
         </div>
         <button
           className={styles.menuButton}
@@ -45,10 +46,10 @@ const Navbar = () => {
             <Link href="/Mapa">Mapa</Link>
           </li>
           <li>
-            <Link href="/iniciar-sesion">Iniciar Sesión</Link>
+            <Link href="/IniciarSesion">Iniciar Sesión</Link>
           </li>
           <li>
-            <Link href="/registrarse">Registrarse</Link>
+            <Link href="/Registro">Registrarse</Link>
           </li>
           <li>
             <Link href="/ayuda">Ayuda</Link>

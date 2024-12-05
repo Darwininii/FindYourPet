@@ -5,14 +5,42 @@
 :root {
   --foreground: #171717;
   --background: #ffffff;
-  --gradient-background: linear-gradient(to right, #43c6ac, #191654);
+  --gradient-background: linear-gradient(
+    to left top,
+    #191654,
+    #003976,
+    #005b8f,
+    #007ca0,
+    #009cab,
+    #009cab,
+    #009cab,
+    #009cab,
+    #007ca0,
+    #005b8f,
+    #003976,
+    #191654
+  );
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --gradient-background: linear-gradient(to right, #43c6ac, #191654);
+    --gradient-background: linear-gradient(
+      to left top,
+      #191654,
+      #003976,
+      #005b8f,
+      #007ca0,
+      #009cab,
+      #009cab,
+      #009cab,
+      #009cab,
+      #007ca0,
+      #005b8f,
+      #003976,
+      #191654
+    );
   }
 }
 
