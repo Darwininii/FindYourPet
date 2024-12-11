@@ -1,0 +1,57 @@
+.styled-wrapper .custum-file-upload {
+  height: 180px;
+  width: 218px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #212121;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: #e8e8e8;
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: #e8e8e8;
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .styled-wrapper .custum-file-upload {
+    width: 230px; /* Ajustar el ancho al 90% del contenedor */
+    height: 150px; /* Reducir la altura */
+    padding: 1rem; /* Ajustar el padding */
+  }
+
+  .custum-file-upload .icon svg {
+    height: 60px; /* Reducir el tamaño del icono */
+  }
+
+  .custum-file-upload .text span {
+    font-size: 14px; /* Reducir el tamaño del texto */
+  }
+}

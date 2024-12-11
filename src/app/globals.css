@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #171717;
+  --background: #ffffff;
+  --gradient-background: linear-gradient(
+    to left top,
+    #191654,
+    #003976,
+    #005b8f,
+    #007ca0,
+    #009cab,
+    #009cab,
+    #009cab,
+    #009cab,
+    #007ca0,
+    #005b8f,
+    #003976,
+    #191654
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --gradient-background: linear-gradient(
+      to left top,
+      #191654,
+      #003976,
+      #005b8f,
+      #007ca0,
+      #009cab,
+      #009cab,
+      #009cab,
+      #009cab,
+      #007ca0,
+      #005b8f,
+      #003976,
+      #191654
+    );
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--gradient-background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  min-height: calc(
+    100vh - 160px
+  ); /* Ajusta según la altura combinada del navbar y footer */
+  padding: 20px;
+}
+
+/* Asegura que el contenedor principal ocupe toda la altura */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altura completa de la ventana */
+}
+
+/* El contenido debe crecer para ocupar el espacio restante */
+.content {
+  flex: 1; /* Crece para llenar el espacio disponible */
+  padding: 20px; /* Agrega espaciado interno opcional */
+}
+
+/* Opcional: Estilo del Footer */
+footer {
+  text-align: center;
+  padding: 10px 20px;
+  border-top: 1px solid #000000;
+}
