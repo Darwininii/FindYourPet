@@ -1,20 +1,17 @@
-export default function TarjetaMascota({ mascota, onClick }) {
+const TarjetaMascota = ({ publicacion }) => {
   return (
-    <div
-      className="relative w-72 h-96 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:scale-105 transition duration-300"
-      onClick={onClick}
-    >
+    <div className="bg-white shadow-md rounded-lg overflow-hidden">
       <img
-        src={mascota.imagen}
-        alt={mascota.nombre}
-        className="w-full h-3/4 object-cover"
+        src={publicacion.imagen || "/placeholder.jpg"} // Imagen de la mascota
+        alt={publicacion.nombreMascota}
+        className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h3 className="text-lg font-bold">{mascota.nombre}</h3>
-        <p className="text-gray-600 text-sm truncate">
-          {mascota.descripcion}
-        </p>
+        <h2 className="text-lg font-bold">{publicacion.nombreMascota}</h2>
+        <p className="text-gray-600">{publicacion.descripcion}</p>
       </div>
     </div>
   );
-}
+};
+
+export default TarjetaMascota;

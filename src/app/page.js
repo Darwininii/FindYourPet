@@ -7,26 +7,41 @@ import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
+import CrearMascota from "@/Componentes/CrearMascota";
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("inicio");
-  const [publicaciones, setPublicaciones] = useState([]);
+  const [mascotas, setMascotas] = useState([]);
   const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
   const [modalData, setModalData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "publicaciones")); // Consulta para obtener todas las publicaciones
+    const fetchMascotas = async () => {
+      try {
+        // Consulta a la colección de mascotas en Firestore
+        const q = query(collection(db, "mascotas"));
+        const querySnapshot = await getDocs(q);
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const publicacionesArray = [];
-      querySnapshot.forEach((doc) => {
-        publicacionesArray.push({ id: doc.id, ...doc.data() });
-      });
-      setPublicaciones(publicacionesArray);
-    });
+        if (querySnapshot.empty) {
+          console.log("No hay mascotas registradas");
+          setMascotas([]);
+        } else {
+          const fetchedMascotas = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setMascotas(fetchedMascotas);
+        }
+      } catch (error) {
+        console.error("Error al obtener las mascotas:", error);
+        setMascotas([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return () => unsubscribe(); // Limpia la suscripción al desmontar
+    fetchMascotas();
   }, []);
 
   const handleFilter = (nuevosFiltros) => {
