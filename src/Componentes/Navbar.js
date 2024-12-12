@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import styles from "./Navbar.module.css";
-import mainlogo from "@/img/Logo.png";
+import mainLog from "@/img/Logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Navbar() {
         <div className={styles.logo}>
           <Link href="/">
             <Image
-              src={mainlogo}
+              src={mainLog}
               width={80}
               height={80}
               alt="Find Your Pet Logo"
