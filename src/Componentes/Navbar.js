@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import styles from "./Navbar.module.css";
+import mainlogo from "@/img/Logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar() {
         <div className={styles.logo}>
           <Link href="/">
             <Image
-              src="/Logo.png"
+              src={mainlogo}
               width={80}
               height={80}
               alt="Find Your Pet Logo"
@@ -56,9 +57,6 @@ export default function Navbar() {
             <Link href="/">Inicio</Link>
           </li>
           <li>
-            <Link href="/buscar">Buscar</Link>
-          </li>
-          <li>
             <Link href="/Mapa">Mapa</Link>
           </li>
           <li>
@@ -75,7 +73,7 @@ export default function Navbar() {
                 <Link href="/perfil">Perfil</Link>
               </li>
               <li>
-              <Link href="/crear-mascota">Registrar Mascotas</Link>
+                <Link href="/crear-mascota">Registrar Mascotas</Link>
               </li>
               <li>
                 <button onClick={handleLogout} className={styles.logoutButton}>

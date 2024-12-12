@@ -1,5 +1,7 @@
 {
   "/page": "app/page.js",
   "/IniciarSesion/page": "app/IniciarSesion/page.js",
-  "/Registro/page": "app/Registro/page.js"
+  "/Registro/page": "app/Registro/page.js",
+  "/Mapa/page": "app/Mapa/page.js",
+  "/Ayuda/page": "app/Ayuda/page.js"
 }

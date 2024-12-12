@@ -28,6 +28,23 @@
       "static/chunks/main-app.js",
       "static/css/app/Registro/page.css",
       "static/chunks/app/Registro/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ],
+    "/Mapa/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Mapa/page.css",
+      "static/chunks/app/Mapa/page.js"
+    ],
+    "/Ayuda/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Ayuda/page.css",
+      "static/chunks/app/Ayuda/page.js"
     ]
   }
 }

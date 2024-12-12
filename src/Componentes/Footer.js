@@ -1,14 +1,22 @@
 "use client";
 
+import Image from "next/image";
+import facebookLogo from "@/img/Facebook.png";
+import instagramLogo from "@/img/Instagram.png";
+import xLogo from "@/img/X.png";
+import mainLogo from "@/img/Logo.png";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
         <div className="mb-6 md:mb-0">
-          <img
-            src="/logo.png"
+          <Image
+            src={mainLogo}
             alt="Logo de la empresa"
             className="h-20 w-20 rounded-full"
+            width={80}
+            height={80}
           />
         </div>
 
@@ -117,7 +125,13 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <div className="p-3 bg-blue-600 rounded-full hover:bg-blue-500">
-              <img src="/Facebook.png" alt="Facebook" className="h-6 w-6" />
+              <Image
+                src={facebookLogo}
+                alt="Facebook"
+                className="h-6 w-6"
+                width={24}
+                height={24}
+              />
             </div>
           </a>
           <a
@@ -126,12 +140,24 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <div className="p-3 bg-pink-600 rounded-full hover:bg-pink-500">
-              <img src="/Instagram.png" alt="Instagram" className="h-6 w-6" />
+              <Image
+                src={instagramLogo}
+                alt="Instagram"
+                className="h-6 w-6"
+                width={24}
+                height={24}
+              />
             </div>
           </a>
           <a href="https://www.x.com" target="_blank" rel="noopener noreferrer">
             <div className="p-3 bg-blue-400 rounded-full hover:bg-blue-300">
-              <img src="/X.png" alt="X (Twitter)" className="h-6 w-6" />
+              <Image
+                src={xLogo}
+                alt="X (Twitter)"
+                className="h-6 w-6"
+                width={24}
+                height={24}
+              />
             </div>
           </a>
         </div>
