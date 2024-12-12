@@ -62,30 +62,33 @@ export default function Perfil() {
   const handleSave = async () => {
     try {
       if (!user) {
-        alert("Debes iniciar sesión para realizar esta acción.");
+        alert("Debes iniciar sesión para actualizar tu perfil.");
         return;
       }
-
+  
       let photoURL = formData.fotoPerfil;
-
+  
+      // Si se seleccionó un archivo para subir
       if (file) {
-        const storageRef = ref(storage, `perfil/${user.uid}`);
-        await uploadBytes(storageRef, file);
-        photoURL = await getDownloadURL(storageRef);
+        const storageRef = ref(storage, `perfil/${user.uid}/${file.name}`);
+        const uploadTask = await uploadBytes(storageRef, file);
+        photoURL = await getDownloadURL(uploadTask.ref); // Obtén la URL de descarga
       }
-
+  
+      // Actualiza el documento del usuario en Firestore
       const docRef = doc(db, "usuarios", user.uid);
       await updateDoc(docRef, {
         ...formData,
-        fotoPerfil: photoURL,
+        fotoPerfil: photoURL, // Actualiza la URL de la foto en Firestore
       });
-
+  
       alert("Perfil actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
       alert("Hubo un error al actualizar tu perfil. Intenta nuevamente.");
     }
   };
+  
 
   if (loading) {
     return <p>Cargando...</p>;
