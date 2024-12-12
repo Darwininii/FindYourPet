@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { db, storage } from "@/firebase";
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import "./Perfil.css"; // Importa los estilos
 
 export default function Perfil() {
   const { user } = useAuth();
@@ -61,6 +61,11 @@ export default function Perfil() {
 
   const handleSave = async () => {
     try {
+      if (!user) {
+        alert("Debes iniciar sesión para realizar esta acción.");
+        return;
+      }
+
       let photoURL = formData.fotoPerfil;
 
       if (file) {
@@ -78,6 +83,7 @@ export default function Perfil() {
       alert("Perfil actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
+      alert("Hubo un error al actualizar tu perfil. Intenta nuevamente.");
     }
   };
 
@@ -86,15 +92,30 @@ export default function Perfil() {
   }
 
   return (
-    <div>
-      <h1>Perfil</h1>
-      <form>
+    <div className="perfil-container">
+      <div className="perfil-header">
+        {formData.fotoPerfil ? (
+          <img
+            src={formData.fotoPerfil}
+            alt="Foto de perfil"
+            className="perfil-foto"
+          />
+        ) : (
+          <div className="perfil-placeholder">Sin Foto</div>
+        )}
+        <h1 className="perfil-nombre">
+          {formData.nombre} {formData.apellido}
+        </h1>
+      </div>
+
+      <form className="perfil-form">
         <input
           type="text"
           name="nombre"
           value={formData.nombre}
           onChange={handleChange}
           placeholder="Nombre"
+          className="perfil-input"
         />
         <input
           type="text"
@@ -102,8 +123,14 @@ export default function Perfil() {
           value={formData.apellido}
           onChange={handleChange}
           placeholder="Apellido"
+          className="perfil-input"
         />
-        <select name="sexo" value={formData.sexo} onChange={handleChange}>
+        <select
+          name="sexo"
+          value={formData.sexo}
+          onChange={handleChange}
+          className="perfil-select"
+        >
           <option value="">Selecciona tu sexo</option>
           <option value="Masculino">Masculino</option>
           <option value="Femenino">Femenino</option>
@@ -114,24 +141,23 @@ export default function Perfil() {
           value={formData.descripcion}
           onChange={handleChange}
           placeholder="Escribe algo sobre ti"
+          className="perfil-textarea"
         ></textarea>
-        <input type="file" onChange={handleFileChange} />
-        <button type="button" onClick={handleSave}>
+        <input type="file" onChange={handleFileChange} className="perfil-file" />
+        <button type="button" onClick={handleSave} className="perfil-button">
           Guardar cambios
         </button>
       </form>
 
-      <h2>Publicaciones</h2>
-      <ul>
+      <h2 className="perfil-subtitulo">Mis Publicaciones</h2>
+      <div className="perfil-publicaciones">
         {publicaciones.map((pub) => (
-          <li key={pub.id}>
-            <h3>{pub.titulo}</h3>
-            <p>{pub.descripcion}</p>
-          </li>
+          <div key={pub.id} className="perfil-publicacion">
+            <h3 className="perfil-publicacion-titulo">{pub.titulo}</h3>
+            <p className="perfil-publicacion-descripcion">{pub.descripcion}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
-
-
