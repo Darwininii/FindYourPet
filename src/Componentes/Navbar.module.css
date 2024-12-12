@@ -1,0 +1,106 @@
+.navbar {
+  width: 100%;
+  color: #fff;
+  padding: 1rem 0;
+  height: 110px;
+  border: black;
+}
+
+.navContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo a {
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.logo img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Estilo base del menú */
+.navLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  position: static;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navLinks a:hover {
+  color: black;
+}
+
+/* Botón de menú */
+.menuButton {
+  display: none; /* Oculto por defecto en pantallas grandes */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+/* Pantallas pequeñas: Menú oculto inicialmente */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none; /* Ocultamos el menú en pantallas pequeñas */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 1rem;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Mostrar el menú cuando está abierto */
+  .navLinksOpen {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* El botón de menú ahora es visible solo en pantallas pequeñas */
+  .menuButton {
+    display: block;
+  }
+}
+
+/* Pantallas grandes: El menú está visible y se comporta de manera estática */
+@media (min-width: 769px) {
+  .menuButton {
+    display: none; /* El botón de menú no se muestra en pantallas grandes */
+  }
+
+  /* Menú visible por defecto en pantallas grandes */
+  .navLinks {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}

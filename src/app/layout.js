@@ -1,11 +1,15 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "../Componentes/Navbar";
+import Footer from "@/Componentes/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -19,11 +23,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
       >
-        {children}
+        <AuthProvider>
+          <div className="layout">
+            <Navbar />
+
+            {/* Authentication Links */}
+            {/* <div className="flex justify-end p-4 space-x-4">
+              <a href="/IniciarSesion" className="text-blue-600 hover:underline">Iniciar Sesión</a>
+              <a href="/Registrate" className="text-blue-600 hover:underline">Registrarse</a>
+            </div> */}
+
+            <main className="content">{children}</main>
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
