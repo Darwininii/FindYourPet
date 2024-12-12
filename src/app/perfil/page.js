@@ -1,9 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAuth } from "@/context/AuthContext"; 
+import { useAuth } from "@/context/AuthContext";
 import { db, storage } from "@/firebase";
-import { doc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "./Perfil.css"; // Importa los estilos
 
@@ -65,33 +73,36 @@ export default function Perfil() {
         alert("Debes iniciar sesión para actualizar tu perfil.");
         return;
       }
-  
+
       let photoURL = formData.fotoPerfil;
-  
+
       // Si se seleccionó un archivo para subir
       if (file) {
         const storageRef = ref(storage, `perfil/${user.uid}/${file.name}`);
         const uploadTask = await uploadBytes(storageRef, file);
         photoURL = await getDownloadURL(uploadTask.ref); // Obtén la URL de descarga
       }
-  
+
       // Actualiza el documento del usuario en Firestore
       const docRef = doc(db, "usuarios", user.uid);
       await updateDoc(docRef, {
         ...formData,
         fotoPerfil: photoURL, // Actualiza la URL de la foto en Firestore
       });
-  
+
       alert("Perfil actualizado con éxito");
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
       alert("Hubo un error al actualizar tu perfil. Intenta nuevamente.");
     }
   };
-  
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-40 w-40 border-t-8 bg-custom-gradient"></div>
+      </div>
+    );
   }
 
   return (
@@ -146,7 +157,11 @@ export default function Perfil() {
           placeholder="Escribe algo sobre ti"
           className="perfil-textarea"
         ></textarea>
-        <input type="file" onChange={handleFileChange} className="perfil-file" />
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="perfil-file"
+        />
         <button type="button" onClick={handleSave} className="perfil-button">
           Guardar cambios
         </button>
