@@ -3,5 +3,6 @@
   "/IniciarSesion/page": "app/IniciarSesion/page.js",
   "/Registro/page": "app/Registro/page.js",
   "/Mapa/page": "app/Mapa/page.js",
-  "/Ayuda/page": "app/Ayuda/page.js"
+  "/Ayuda/page": "app/Ayuda/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
 }
