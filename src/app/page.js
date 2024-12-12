@@ -105,7 +105,7 @@ export default function HomePage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-40 w-40 border-t-8 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-40 w-40 border-t-8 bg-custom-gradient"></div>
       </div>
     );
   }

@@ -2,7 +2,6 @@
   "/Mapa/page": "app/Mapa/page.js",
   "/Ayuda/page": "app/Ayuda/page.js",
   "/perfil/page": "app/perfil/page.js",
-  "/page": "app/page.js",
   "/IniciarSesion/page": "app/IniciarSesion/page.js",
-  "/_not-found/page": "app/_not-found/page.js"
+  "/page": "app/page.js"
 }
