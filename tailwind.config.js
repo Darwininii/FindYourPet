@@ -17,14 +17,3 @@ module.exports = {
   },
   plugins: [],
 };
-
-module.exports = {
-  content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./Componentes/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
