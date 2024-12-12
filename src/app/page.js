@@ -1,54 +1,43 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
-import { db } from "../firebase"; // Ajusta la ruta según tu estructura
+import { collection, query, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
-import CrearMascota from "@/Componentes/CrearMascota";
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("inicio");
-  const [mascotas, setMascotas] = useState([]);
+  const [publicaciones, setPublicaciones] = useState([]);
   const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
   const [modalData, setModalData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Obtener publicaciones desde Firestore
   useEffect(() => {
-    const fetchMascotas = async () => {
-      try {
-        // Consulta a la colección de mascotas en Firestore
-        const q = query(collection(db, "mascotas"));
-        const querySnapshot = await getDocs(q);
+    const q = query(collection(db, "publicaciones"));
 
-        if (querySnapshot.empty) {
-          console.log("No hay mascotas registradas");
-          setMascotas([]);
-        } else {
-          const fetchedMascotas = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setMascotas(fetchedMascotas);
-        }
-      } catch (error) {
-        console.error("Error al obtener las mascotas:", error);
-        setMascotas([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const publicacionesArray = [];
+      querySnapshot.forEach((doc) => {
+        publicacionesArray.push({ id: doc.id, ...doc.data() });
+      });
+      setPublicaciones(publicacionesArray);
+      setLoading(false); // Cambiar estado de carga a falso
+    });
 
-    fetchMascotas();
+    return () => unsubscribe();
   }, []);
 
+  // Manejo de filtros
   const handleFilter = (nuevosFiltros) => {
     setFiltros(nuevosFiltros);
   };
 
-  const mascotasFiltradas = mascotas.filter((mascota) => {
+  // Filtrar las mascotas
+  const mascotasFiltradas = publicaciones.filter((mascota) => {
     const coincideEspecie =
       !filtros.especie ||
       mascota.especie?.toLowerCase() === filtros.especie.toLowerCase();
@@ -60,6 +49,7 @@ export default function HomePage() {
     return coincideEspecie && coincideUbicacion;
   });
 
+  // Manejo del modal
   const abrirModal = (mascota) => {
     setModalData(mascota);
   };
@@ -68,16 +58,7 @@ export default function HomePage() {
     setModalData(null);
   };
 
-  // Estado de carga
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-40 w-40 border-t-8 bg-custom-gradient"></div>
-      </div>
-    );
-  }
-
-  // Navigation sections
+  // Renderizar sección activa
   const renderSection = () => {
     switch (activeSection) {
       case "inicio":
@@ -88,7 +69,7 @@ export default function HomePage() {
             </h1>
             <Filtros onFilter={handleFilter} />
 
-            {mascotas.length === 0 ? (
+            {mascotasFiltradas.length === 0 ? (
               <div className="text-center py-10">
                 <h2 className="text-2xl font-bold mb-4">
                   No hay mascotas registradas
@@ -119,6 +100,15 @@ export default function HomePage() {
         return null;
     }
   };
+
+  // Estado de carga
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-40 w-40 border-t-8 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -163,10 +153,10 @@ export default function HomePage() {
             >
               X
             </button>
-            <h2 className="text-2xl font-bold">{modalData.nombre}</h2>
+            <h2 className="text-2xl font-bold">{modalData.nombreMascota}</h2>
             <img
               src={modalData.imagen}
-              alt={modalData.nombre}
+              alt={modalData.nombreMascota}
               className="w-full h-64 object-cover mt-4 rounded-lg"
             />
             <p className="mt-4">{modalData.descripcion}</p>
@@ -182,17 +172,17 @@ export default function HomePage() {
             />
 
             <div className="mt-4">
-              <button
+              {/* <button
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `${window.location.origin}/publicacion/${modalData.id}`
+                    ${window.location.origin}/publicacion/${modalData.id}
                   );
                   alert("Enlace copiado al portapapeles");
                 }}
               >
                 Compartir
-              </button>
+              </button> */}
               <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">
                 Me gusta
               </button>
