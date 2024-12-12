@@ -54,7 +54,7 @@ const Registrate = () => {
   return (
     <div className="contenedor">
       <form onSubmit={handleRegister} className="form_area">
-        <h1 className="title">Registate</h1>
+        <h1 className="title">Registrate</h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <div className="form_group">
           <input

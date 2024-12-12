@@ -53,11 +53,10 @@ const CrearMascota = () => {
       });
 
       setSuccess("Mascota registrada exitosamente.");
-      setFormData({
-        nombreMascota: "",
-        descripcion: "",
-        imagen: "",
-      });
+      setFormData({ nombreMascota: "", descripcion: "", imagen: "" });
+
+      // Redirige a la página principal
+      router.push("/");
     } catch (err) {
       console.error("Error al registrar la mascota:", err);
       setError("Hubo un error al registrar la mascota. Inténtalo nuevamente.");
