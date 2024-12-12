@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import styles from "./Navbar.module.css";
-import mainLog from "@/img/Logo.png";
+import mainLog from "@/img/logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

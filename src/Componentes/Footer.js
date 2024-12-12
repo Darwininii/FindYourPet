@@ -4,7 +4,7 @@ import Image from "next/image";
 import facebookLogo from "@/img/Facebook.png";
 import instagramLogo from "@/img/Instagram.png";
 import xLogo from "@/img/X.png";
-import mainLogo from "@/img/Logo.png";
+import mainLogo from "@/img/logo.png";
 
 export default function Footer() {
   return (
