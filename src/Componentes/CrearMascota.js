@@ -19,7 +19,7 @@ const CrearMascota = () => {
 
   const [error, setError] = useState("");
   const router = useRouter();
-  const { currentUser } = useAuth();
+  const { currentUser, loading } = useAuth(); // Incluye loading del contexto
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +29,11 @@ const CrearMascota = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (loading) {
+      setError("Cargando estado de sesión. Intenta nuevamente.");
+      return;
+    }
+
     if (!currentUser) {
       setError("Debes iniciar sesión para registrar una mascota.");
       return;
@@ -37,7 +42,6 @@ const CrearMascota = () => {
     try {
       const publicacionesRef = collection(db, "mascotas");
 
-      // Agregar la nueva publicación
       await addDoc(publicacionesRef, {
         ...formData,
         userId: currentUser.uid,
@@ -45,19 +49,22 @@ const CrearMascota = () => {
       });
 
       alert("Mascota registrada exitosamente");
-      router.push("/"); // Redirige a la página principal o a una página específica
+      router.push("/");
     } catch (err) {
       console.error("Error al registrar la mascota:", err);
       setError("Hubo un error al registrar la mascota.");
     }
   };
 
+  if (loading) {
+    return <p>Cargando...</p>; // Renderiza un mensaje de carga mientras se sincroniza la sesión
+  }
+
   return (
     <div className="container">
       <h2 className="title">Registrar Nueva Mascota</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit} className="form">
-        {/* Campo de Título (opcional) */}
         <div>
           <label htmlFor="titulo" className="label">Título</label>
           <input
@@ -71,7 +78,6 @@ const CrearMascota = () => {
           />
         </div>
 
-        {/* Nombre de la Mascota */}
         <div>
           <label htmlFor="nombre" className="label">Nombre</label>
           <input
@@ -85,7 +91,6 @@ const CrearMascota = () => {
           />
         </div>
 
-        {/* Descripción */}
         <div>
           <label htmlFor="descripcion" className="label">Descripción</label>
           <textarea
@@ -94,12 +99,10 @@ const CrearMascota = () => {
             value={formData.descripcion}
             onChange={handleChange}
             className="textarea"
-            placeholder="Descripción detallada de la mascota"
             required
           />
         </div>
 
-        {/* Especie */}
         <div>
           <label htmlFor="especie" className="label">Especie</label>
           <select
@@ -118,7 +121,6 @@ const CrearMascota = () => {
           </select>
         </div>
 
-        {/* Ubicación */}
         <div>
           <label htmlFor="ubicacion" className="label">Ubicación</label>
           <input
@@ -128,12 +130,10 @@ const CrearMascota = () => {
             value={formData.ubicacion}
             onChange={handleChange}
             className="input"
-            placeholder="Ej: Parque Central, Ciudad"
             required
           />
         </div>
 
-        {/* Imagen */}
         <div>
           <label htmlFor="imagen" className="label">Imagen (URL)</label>
           <input
@@ -143,7 +143,6 @@ const CrearMascota = () => {
             value={formData.imagen}
             onChange={handleChange}
             className="input"
-            placeholder="Ingresa el enlace de una imagen"
             required
           />
         </div>
