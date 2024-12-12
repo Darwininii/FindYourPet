@@ -22,7 +22,7 @@ const IniciarSesion = () => {
   };
 
   return (
-    <div className="container">
+    <div className="contenedor">
       <form className="form_area" onSubmit={handleLogin}>
         <p className="title">Inicia Sesion</p>
         <div className="form_group">

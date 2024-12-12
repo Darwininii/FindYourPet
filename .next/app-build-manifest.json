@@ -11,23 +11,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/Mapa/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Mapa/page.css",
-      "static/chunks/app/Mapa/page.js"
-    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/page.css",
       "static/chunks/app/page.js"
-    ],
-    "/Donacion/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Donacion/page.css",
-      "static/chunks/app/Donacion/page.js"
     ],
     "/IniciarSesion/page": [
       "static/chunks/webpack.js",
@@ -40,11 +28,6 @@
       "static/chunks/main-app.js",
       "static/css/app/Registro/page.css",
       "static/chunks/app/Registro/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

@@ -1,7 +1,5 @@
 {
-  "/Mapa/page": "app/Mapa/page.js",
   "/page": "app/page.js",
   "/IniciarSesion/page": "app/IniciarSesion/page.js",
-  "/Registro/page": "app/Registro/page.js",
-  "/Donacion/page": "app/Donacion/page.js"
+  "/Registro/page": "app/Registro/page.js"
 }
