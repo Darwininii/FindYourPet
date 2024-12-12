@@ -75,7 +75,7 @@ export default function Navbar() {
                 <Link href="/perfil">Perfil</Link>
               </li>
               <li>
-                <Link href="/publicacion">Registrar Mascotas</Link>
+              <Link href="/crear-mascota">Registrar Mascotas</Link>
               </li>
               <li>
                 <button onClick={handleLogout} className={styles.logoutButton}>

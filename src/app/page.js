@@ -7,6 +7,8 @@ import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
+import CrearMascota from "@/Componentes/CrearMascota";
+
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("inicio");
