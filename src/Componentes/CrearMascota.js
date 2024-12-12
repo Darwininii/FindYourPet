@@ -1,25 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import "./CrearMascota.css";
 
 const CrearMascota = () => {
+  const [user, setUser] = useState(null); // Estado para el usuario autenticado
   const [formData, setFormData] = useState({
-    titulo: "",
-    nombre: "",
+    nombreMascota: "",
     descripcion: "",
-    especie: "",
-    ubicacion: "",
     imagen: "",
   });
-
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
-  const { currentUser, loading } = useAuth(); // Incluye loading del contexto
+
+  // Verificar si el usuario está autenticado
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,125 +39,93 @@ const CrearMascota = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (loading) {
-      setError("Cargando estado de sesión. Intenta nuevamente.");
-      return;
-    }
-
-    if (!currentUser) {
+    if (!user) {
       setError("Debes iniciar sesión para registrar una mascota.");
       return;
     }
 
     try {
-      const publicacionesRef = collection(db, "mascotas");
-
-      await addDoc(publicacionesRef, {
+      // Agregar la nueva mascota a Firestore
+      await addDoc(collection(db, "publicaciones"), {
         ...formData,
-        userId: currentUser.uid,
-        createdAt: new Date().toISOString(),
+        userId: user.uid, // Asociar la mascota al usuario autenticado
+        fechaRegistro: new Date(),
       });
 
-      alert("Mascota registrada exitosamente");
-      router.push("/");
+      setSuccess("Mascota registrada exitosamente.");
+      setFormData({
+        nombreMascota: "",
+        descripcion: "",
+        imagen: "",
+      });
     } catch (err) {
       console.error("Error al registrar la mascota:", err);
-      setError("Hubo un error al registrar la mascota.");
+      setError("Hubo un error al registrar la mascota. Inténtalo nuevamente.");
     }
   };
 
-  if (loading) {
-    return <p>Cargando...</p>; // Renderiza un mensaje de carga mientras se sincroniza la sesión
+  if (!user) {
+    return (
+      <div className="text-center p-6">
+        <p className="text-red-500">
+          Debes iniciar sesión para registrar una mascota.
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div className="container">
-      <h2 className="title">Registrar Nueva Mascota</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit} className="form">
+    <div className="max-w-3xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">Registrar Mascota</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {success && <p className="text-green-500 mb-4">{success}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="titulo" className="label">Título</label>
+          <label className="block font-medium mb-1" htmlFor="nombreMascota">
+            Nombre de la Mascota:
+          </label>
           <input
             type="text"
-            name="titulo"
-            id="titulo"
-            value={formData.titulo}
+            id="nombreMascota"
+            name="nombreMascota"
+            value={formData.nombreMascota}
             onChange={handleChange}
-            className="input"
-            placeholder="Ej: Mascota perdida en el parque"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="nombre" className="label">Nombre</label>
-          <input
-            type="text"
-            name="nombre"
-            id="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            className="input"
             required
+            className="w-full border rounded-lg p-2"
           />
         </div>
-
         <div>
-          <label htmlFor="descripcion" className="label">Descripción</label>
+          <label className="block font-medium mb-1" htmlFor="descripcion">
+            Descripción:
+          </label>
           <textarea
-            name="descripcion"
             id="descripcion"
+            name="descripcion"
             value={formData.descripcion}
             onChange={handleChange}
-            className="textarea"
             required
+            className="w-full border rounded-lg p-2"
           />
         </div>
-
         <div>
-          <label htmlFor="especie" className="label">Especie</label>
-          <select
-            name="especie"
-            id="especie"
-            value={formData.especie}
-            onChange={handleChange}
-            className="select"
-            required
-          >
-            <option value="">Seleccionar</option>
-            <option value="Perro">Perro</option>
-            <option value="Gato">Gato</option>
-            <option value="Ave">Ave</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="ubicacion" className="label">Ubicación</label>
+          <label className="block font-medium mb-1" htmlFor="imagen">
+            Imagen (URL):
+          </label>
           <input
             type="text"
-            name="ubicacion"
-            id="ubicacion"
-            value={formData.ubicacion}
-            onChange={handleChange}
-            className="input"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="imagen" className="label">Imagen (URL)</label>
-          <input
-            type="text"
-            name="imagen"
             id="imagen"
+            name="imagen"
             value={formData.imagen}
             onChange={handleChange}
-            className="input"
-            required
+            className="w-full border rounded-lg p-2"
           />
         </div>
-
-        <button type="submit" className="button">Registrar Mascota</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+        >
+          Registrar Mascota
+        </button>
       </form>
     </div>
   );
