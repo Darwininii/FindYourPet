@@ -33,8 +33,8 @@ export default function RootLayout({ children }) {
             
             {/* Authentication Links */}
             <div className="flex justify-end p-4 space-x-4">
-              <a href="/Login" className="text-blue-600 hover:underline">Iniciar Sesión</a>
-              <a href="/registrarse" className="text-blue-600 hover:underline">Registrarse</a>
+              <a href="/IniciarSesion" className="text-blue-600 hover:underline">Iniciar Sesión</a>
+              <a href="/Registrate" className="text-blue-600 hover:underline">Registrarse</a>
             </div>
             
             <main className="content">{children}</main>

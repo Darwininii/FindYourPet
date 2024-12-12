@@ -7,7 +7,7 @@ import { db } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
-const Registro = () => {
+const Registrate = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -131,4 +131,4 @@ const Registro = () => {
   );
 };
 
-export default Registro;
+export default Registrate;

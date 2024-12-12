@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
-const Login = () => {
+const IniciarSesion = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -50,4 +50,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default IniciarSesion;
