@@ -7,8 +7,10 @@ import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState("inicio");
   const [publicaciones, setPublicaciones] = useState([]);
   const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
@@ -126,7 +128,10 @@ export default function HomePage() {
           className={`px-4 py-2 rounded ${
             activeSection === "mapa" ? "boton_sup text-white" : "sec_boton"
           }`}
-          onClick={() => setActiveSection("mapa")}
+          onClick={() => {
+            setActiveSection("mapa");
+            router.push("/Mapa"); // Aquí rediriges a la página
+          }}
         >
           Mapa
         </button>
@@ -172,17 +177,6 @@ export default function HomePage() {
             />
 
             <div className="mt-4">
-              {/* <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2"
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    ${window.location.origin}/publicacion/${modalData.id}
-                  );
-                  alert("Enlace copiado al portapapeles");
-                }}
-              >
-                Compartir
-              </button> */}
               <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">
                 Me gusta
               </button>

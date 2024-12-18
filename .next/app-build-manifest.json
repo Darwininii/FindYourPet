@@ -17,18 +17,6 @@
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/IniciarSesion/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/IniciarSesion/page.css",
-      "static/chunks/app/IniciarSesion/page.js"
-    ],
-    "/Registro/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/Registro/page.css",
-      "static/chunks/app/Registro/page.js"
-    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -40,17 +28,23 @@
       "static/css/app/Mapa/page.css",
       "static/chunks/app/Mapa/page.js"
     ],
-    "/Ayuda/page": [
+    "/Registro/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/Ayuda/page.css",
-      "static/chunks/app/Ayuda/page.js"
+      "static/css/app/Registro/page.css",
+      "static/chunks/app/Registro/page.js"
     ],
-    "/perfil/page": [
+    "/IniciarSesion/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/perfil/page.css",
-      "static/chunks/app/perfil/page.js"
+      "static/css/app/IniciarSesion/page.css",
+      "static/chunks/app/IniciarSesion/page.js"
+    ],
+    "/Donacion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/Donacion/page.css",
+      "static/chunks/app/Donacion/page.js"
     ]
   }
 }

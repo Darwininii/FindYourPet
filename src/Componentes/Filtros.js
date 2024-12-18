@@ -16,7 +16,7 @@ export default function Filtros({ onFilter }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 flex flex-wrap gap-4 items-center"
+      className="mb-6 flex flex-wrap gap-4 items-centerc buscar-mascota"
     >
       {/* Campo especie */}
       <select name="especie" onChange={handleChange} className="style sub_ttl">
