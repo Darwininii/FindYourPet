@@ -148,7 +148,7 @@ export default function HomePage() {
       {/* Main Content */}
       {renderSection()}
 
-      {/* Modal for Pet Details */}
+      {/* Modal para Detalles de Mascota */}
       {modalData && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg max-w-lg w-full">
@@ -166,10 +166,11 @@ export default function HomePage() {
             />
             <p className="mt-4">{modalData.descripcion}</p>
             <p className="mt-2">
-              <strong>Ubicación:</strong> {modalData.ubicacion}
+              <strong>Ubicación:</strong>{" "}
+              {modalData.ubicacion || "No especificada"}
             </p>
 
-            {/* Comments Section */}
+            {/* Sección de Comentarios */}
             <ComentariosList publicacionId={modalData.id} />
             <Comentarios
               publicacionId={modalData.id}

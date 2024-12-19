@@ -4,20 +4,24 @@ import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/navigation";
 
 const CrearMascota = () => {
-  const [user, setUser] = useState(null); // Estado para el usuario autenticado
+  const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     nombreMascota: "",
     descripcion: "",
-    imagen: "",
+    especie: "",
+    ubicacion: "",
+    imagen: null, // Cambiado para soportar archivos
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [subiendoImagen, setSubiendoImagen] = useState(false);
   const router = useRouter();
+  const storage = getStorage();
 
-  // Verificar si el usuario está autenticado
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -33,7 +37,12 @@ const CrearMascota = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "imagen") {
+      setFormData({ ...formData, imagen: e.target.files[0] }); // Guardar archivo
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -45,21 +54,42 @@ const CrearMascota = () => {
     }
 
     try {
-      // Agregar la nueva mascota a Firestore
+      setSubiendoImagen(true);
+
+      // Subir la imagen a Firebase Storage
+      const imagenRef = ref(
+        storage,
+        `mascotas/${Date.now()}_${formData.imagen.name}`
+      );
+      await uploadBytes(imagenRef, formData.imagen);
+      const imagenURL = await getDownloadURL(imagenRef);
+
+      // Guardar los datos en Firestore
       await addDoc(collection(db, "publicaciones"), {
-        ...formData,
-        userId: user.uid, // Asociar la mascota al usuario autenticado
+        nombreMascota: formData.nombreMascota,
+        descripcion: formData.descripcion,
+        especie: formData.especie,
+        ubicacion: formData.ubicacion,
+        imagen: imagenURL,
+        userId: user.uid,
         fechaRegistro: new Date(),
       });
 
       setSuccess("Mascota registrada exitosamente.");
-      setFormData({ nombreMascota: "", descripcion: "", imagen: "" });
+      setFormData({
+        nombreMascota: "",
+        descripcion: "",
+        especie: "",
+        ubicacion: "",
+        imagen: null,
+      });
 
-      // Redirige a la página principal
       router.push("/");
     } catch (err) {
       console.error("Error al registrar la mascota:", err);
       setError("Hubo un error al registrar la mascota. Inténtalo nuevamente.");
+    } finally {
+      setSubiendoImagen(false);
     }
   };
 
@@ -94,6 +124,34 @@ const CrearMascota = () => {
           />
         </div>
         <div>
+          <label className="block font-medium mb-1" htmlFor="especie">
+            Especie:
+          </label>
+          <input
+            type="text"
+            id="especie"
+            name="especie"
+            value={formData.especie}
+            onChange={handleChange}
+            required
+            className="w-full border rounded-lg p-2"
+          />
+        </div>
+        <div>
+          <label className="block font-medium mb-1" htmlFor="ubicacion">
+            Ubicación:
+          </label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            value={formData.ubicacion}
+            onChange={handleChange}
+            required
+            className="w-full border rounded-lg p-2"
+          />
+        </div>
+        <div>
           <label className="block font-medium mb-1" htmlFor="descripcion">
             Descripción:
           </label>
@@ -108,22 +166,23 @@ const CrearMascota = () => {
         </div>
         <div>
           <label className="block font-medium mb-1" htmlFor="imagen">
-            Imagen (URL):
+            Imagen:
           </label>
           <input
-            type="text"
+            type="file"
             id="imagen"
             name="imagen"
-            value={formData.imagen}
             onChange={handleChange}
+            required
             className="w-full border rounded-lg p-2"
           />
         </div>
         <button
           type="submit"
           className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+          disabled={subiendoImagen}
         >
-          Registrar Mascota
+          {subiendoImagen ? "Subiendo..." : "Registrar Mascota"}
         </button>
       </form>
     </div>
