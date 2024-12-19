@@ -7,17 +7,14 @@ import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
-import { useRouter } from "next/navigation";
 
 export default function HomePage() {
-  const router = useRouter();
-  const [activeSection, setActiveSection] = useState("inicio");
   const [publicaciones, setPublicaciones] = useState([]);
   const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
   const [modalData, setModalData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Obtener publicaciones desde Firestore
+  // Obtener publicaciones en tiempo real desde Firestore
   useEffect(() => {
     const q = query(collection(db, "publicaciones"));
 
@@ -27,18 +24,13 @@ export default function HomePage() {
         publicacionesArray.push({ id: doc.id, ...doc.data() });
       });
       setPublicaciones(publicacionesArray);
-      setLoading(false); // Cambiar estado de carga a falso
+      setLoading(false); // Fin de la carga
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe(); // Limpia la suscripción al desmontar
   }, []);
 
-  // Manejo de filtros
-  const handleFilter = (nuevosFiltros) => {
-    setFiltros(nuevosFiltros);
-  };
-
-  // Filtrar las mascotas
+  // Aplicar filtros a las publicaciones
   const mascotasFiltradas = publicaciones.filter((mascota) => {
     const coincideEspecie =
       !filtros.especie ||
@@ -54,58 +46,10 @@ export default function HomePage() {
   });
 
   // Manejo del modal
-  const abrirModal = (mascota) => {
-    setModalData(mascota);
-  };
+  const abrirModal = (mascota) => setModalData(mascota);
+  const cerrarModal = () => setModalData(null);
 
-  const cerrarModal = () => {
-    setModalData(null);
-  };
-
-  // Renderizar sección activa
-  const renderSection = () => {
-    switch (activeSection) {
-      case "inicio":
-        return (
-          <div className="min-h-screen p-6">
-            <h1 className="text-4xl font-bold text-center mb-6">
-              Mascotas Perdidas
-            </h1>
-            <Filtros onFilter={handleFilter} />
-
-            {mascotasFiltradas.length === 0 ? (
-              <div className="text-center py-10">
-                <h2 className="text-2xl font-bold mb-4">
-                  No hay mascotas registradas
-                </h2>
-                <p>
-                  Aún no se han agregado mascotas perdidas. ¡Sé el primero en
-                  reportar!
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-                {mascotasFiltradas.map((mascota) => (
-                  <TarjetaMascota
-                    key={mascota.id}
-                    mascota={mascota}
-                    onClick={() => abrirModal(mascota)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      case "mapa":
-        return <div>Sección de Mapa</div>;
-      case "reportar":
-        return <div>Sección de Reportar Mascota</div>;
-      default:
-        return null;
-    }
-  };
-
-  // Estado de carga
+  // Mostrar estado de carga
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -115,40 +59,31 @@ export default function HomePage() {
   }
 
   return (
-    <>
-      {/* Navigation Tabs */}
-      <div className="flex justify-center space-x-4 p-4 shadow-sm">
-        <button
-          className={`px-4 py-2 rounded ${
-            activeSection === "inicio" ? "boton_sup text-black" : "sec_boton"
-          }`}
-          onClick={() => setActiveSection("inicio")}
-        >
-          Inicio
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeSection === "mapa" ? "boton_sup text-white" : "sec_boton"
-          }`}
-          onClick={() => {
-            setActiveSection("mapa");
-            router.push("/Mapa"); // Aquí rediriges a la página
-          }}
-        >
-          Mapa
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeSection === "reportar" ? "boton_sup text-white" : "sec_boton"
-          }`}
-          onClick={() => setActiveSection("reportar")}
-        >
-          Reportar
-        </button>
-      </div>
+    <div className="min-h-screen p-6">
+      <h1 className="text-4xl font-bold text-center mb-6">Mascotas Perdidas</h1>
 
-      {/* Main Content */}
-      {renderSection()}
+      {/* Componente de Filtros */}
+      <Filtros onFilter={(nuevosFiltros) => setFiltros(nuevosFiltros)} />
+
+      {/* Lista de publicaciones */}
+      {mascotasFiltradas.length === 0 ? (
+        <div className="text-center py-10">
+          <h2 className="text-2xl font-bold mb-4">
+            No hay mascotas registradas
+          </h2>
+          <p>¡Sé el primero en reportar una mascota perdida!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+          {mascotasFiltradas.map((mascota) => (
+            <TarjetaMascota
+              key={mascota.id}
+              mascota={mascota}
+              onClick={() => abrirModal(mascota)}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Modal para Detalles de Mascota */}
       {modalData && (
@@ -193,6 +128,6 @@ export default function HomePage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
