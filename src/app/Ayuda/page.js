@@ -1,10 +1,11 @@
 import React from "react";
-import IniciarSesion from "../../Componentes/Ayuda";
+import Ayuda from "../../Componentes/Ayuda";
 
-export default function page() {
+export default function AyudaPage() {
   return (
     <div>
       <Ayuda />
     </div>
   );
 }
+
