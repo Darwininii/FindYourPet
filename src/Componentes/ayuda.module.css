@@ -1,0 +1,38 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 4rem;
+  color: #110202;
+}
+
+.description {
+  font-size: 1.5rem;
+  color: #0a0202;
+}
+
+.section {
+  margin: 20px 0;
+}
+
+.link {
+  color: #0d3772;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
