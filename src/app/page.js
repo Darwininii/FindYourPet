@@ -9,12 +9,12 @@ import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
 
 export default function HomePage() {
-  const [publicaciones, setPublicaciones] = useState([]);
-  const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
-  const [modalData, setModalData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [publicaciones, setPublicaciones] = useState([]); // Publicaciones desde Firestore
+  const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" }); // Filtros aplicados
+  const [modalData, setModalData] = useState(null); // Datos para el modal
+  const [loading, setLoading] = useState(true); // Estado de carga
 
-  // Obtener publicaciones en tiempo real desde Firestore
+  // Obtener publicaciones desde Firestore en tiempo real
   useEffect(() => {
     const q = query(collection(db, "publicaciones"));
 
@@ -24,10 +24,10 @@ export default function HomePage() {
         publicacionesArray.push({ id: doc.id, ...doc.data() });
       });
       setPublicaciones(publicacionesArray);
-      setLoading(false); // Cambiar el estado de carga a falso
+      setLoading(false); // Cambiar estado de carga a falso
     });
 
-    return () => unsubscribe(); // Limpia la suscripción al desmontar
+    return () => unsubscribe(); // Limpiar la suscripción al desmontar
   }, []);
 
   // Aplicar filtros a las publicaciones
@@ -54,6 +54,16 @@ export default function HomePage() {
     );
   }
 
+  // Mostrar mensaje si no hay publicaciones
+  if (publicaciones.length === 0) {
+    return (
+      <div className="text-center p-6">
+        <h2 className="text-2xl font-bold mb-4">No hay mascotas registradas</h2>
+        <p>¡Sé el primero en reportar una mascota perdida!</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <h1 className="text-4xl font-bold text-center mb-6">Mascotas Perdidas</h1>
@@ -62,25 +72,18 @@ export default function HomePage() {
       <Filtros onFilter={(nuevosFiltros) => setFiltros(nuevosFiltros)} />
 
       {/* Lista de publicaciones */}
-      {mascotasFiltradas.length === 0 ? (
-        <div className="text-center py-10">
-          <h2 className="text-2xl font-bold mb-4">No hay mascotas registradas</h2>
-          <p>¡Sé el primero en reportar una mascota perdida!</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-          {mascotasFiltradas.map((mascota) => (
-            <TarjetaMascota
-              key={mascota.id}
-              mascota={{
-                ...mascota,
-                imagen: mascota.imagen || "/placeholder-image.png", // Imagen predeterminada si falta
-              }}
-              onClick={() => abrirModal(mascota)}
-            />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        {mascotasFiltradas.map((mascota) => (
+          <TarjetaMascota
+            key={mascota.id}
+            mascota={{
+              ...mascota,
+              imagen: mascota.imagen || "/placeholder-image.png", // Imagen predeterminada
+            }}
+            onClick={() => abrirModal(mascota)}
+          />
+        ))}
+      </div>
 
       {/* Modal para Detalles de Mascota */}
       {modalData && (
@@ -93,19 +96,11 @@ export default function HomePage() {
               X
             </button>
             <h2 className="text-2xl font-bold">{modalData.nombreMascota || "Sin nombre"}</h2>
-            {modalData.imagen ? (
-              <img
-                src={modalData.imagen}
-                alt={modalData.nombreMascota || "Mascota"}
-                className="w-full h-64 object-cover mt-4 rounded-lg"
-              />
-            ) : (
-              <img
-                src="/placeholder-image.png" // Imagen predeterminada si falta
-                alt="Imagen no disponible"
-                className="w-full h-64 object-cover mt-4 rounded-lg"
-              />
-            )}
+            <img
+              src={modalData.imagen || "/placeholder-image.png"}
+              alt={modalData.nombreMascota || "Mascota"}
+              className="w-full h-64 object-cover mt-4 rounded-lg"
+            />
             <p className="mt-4">{modalData.descripcion || "Sin descripción"}</p>
             <p className="mt-2">
               <strong>Ubicación:</strong> {modalData.ubicacion || "No especificada"}
@@ -126,5 +121,6 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
