@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase"; // Ajusta la ruta según tu estructura
 import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
@@ -58,36 +58,32 @@ export default function HomePage() {
     );
   }
 
-  // Mostrar mensaje si no hay publicaciones
-  if (publicaciones.length === 0) {
-    return (
-      <div className="text-center p-6">
-        <h2 className="text-2xl font-bold mb-4">No hay mascotas registradas</h2>
-        <p>¡Sé el primero en reportar una mascota perdida!</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen p-6 ">
+    <div className="min-h-screen p-6">
       <h1 className="text-4xl font-bold text-center mb-6">Mascotas Perdidas</h1>
 
       {/* Componente de Filtros */}
       <Filtros onFilter={(nuevosFiltros) => setFiltros(nuevosFiltros)} />
 
       {/* Lista de publicaciones */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-        {mascotasFiltradas.map((mascota) => (
-          <TarjetaMascota
-            key={mascota.id}
-            mascota={{
-              ...mascota,
-              imagen: mascota.imagen || "/placeholder-image.png", // Imagen predeterminada
-            }}
-            onClick={() => abrirModal(mascota)}
-          />
-        ))}
-      </div>
+      {mascotasFiltradas.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+          {mascotasFiltradas.map((mascota) => (
+            <TarjetaMascota
+              key={mascota.id}
+              mascota={{
+                ...mascota,
+                imagen: mascota.imagen || "/placeholder-image.jpg", // Imagen predeterminada
+              }}
+              onClick={() => abrirModal(mascota)}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-700 mt-6">
+          No hay publicaciones disponibles.
+        </p>
+      )}
 
       {/* Modal para Detalles de Mascota */}
       {modalData && (
@@ -103,7 +99,7 @@ export default function HomePage() {
               {modalData.nombreMascota || "Sin nombre"}
             </h2>
             <img
-              src={modalData.imagen || "/placeholder-image.png"}
+              src={modalData.imagen || "/placeholder-image.jpg"}
               alt={modalData.nombreMascota || "Mascota"}
               className="w-full h-64 object-cover mt-4 rounded-lg"
             />
