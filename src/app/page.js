@@ -2,19 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase"; // Ajusta la ruta según tu estructura
+import { db } from "../firebase"; // Ajusta la ruta si es necesario
 import Filtros from "@/Componentes/Filtros";
 import TarjetaMascota from "@/Componentes/TarjetaMascota";
 import ComentariosList from "@/Componentes/ComentariosList";
 import Comentarios from "@/Componentes/Comentarios";
 
 export default function HomePage() {
-  const [publicaciones, setPublicaciones] = useState([]); // Publicaciones desde Firestore
-  const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" }); // Filtros aplicados
-  const [modalData, setModalData] = useState(null); // Datos para el modal
-  const [loading, setLoading] = useState(true); // Estado de carga
+  const [publicaciones, setPublicaciones] = useState([]);
+  const [filtros, setFiltros] = useState({ especie: "", ubicacion: "" });
+  const [modalData, setModalData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Obtener publicaciones desde Firestore en tiempo real
   useEffect(() => {
     const q = query(collection(db, "publicaciones"));
 
@@ -23,14 +22,14 @@ export default function HomePage() {
       querySnapshot.forEach((doc) => {
         publicacionesArray.push({ id: doc.id, ...doc.data() });
       });
+      console.log("Publicaciones cargadas:", publicacionesArray); // Verifica las publicaciones cargadas
       setPublicaciones(publicacionesArray);
-      setLoading(false); // Cambiar estado de carga a falso
+      setLoading(false);
     });
 
-    return () => unsubscribe(); // Limpiar la suscripción al desmontar
+    return () => unsubscribe();
   }, []);
 
-  // Aplicar filtros a las publicaciones
   const mascotasFiltradas = publicaciones.filter((mascota) => {
     const coincideEspecie =
       !filtros.especie ||
@@ -45,11 +44,9 @@ export default function HomePage() {
     return coincideEspecie && coincideUbicacion;
   });
 
-  // Manejo del modal
   const abrirModal = (mascota) => setModalData(mascota);
   const cerrarModal = () => setModalData(null);
 
-  // Mostrar estado de carga
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -62,30 +59,24 @@ export default function HomePage() {
     <div className="min-h-screen p-6">
       <h1 className="text-4xl font-bold text-center mb-6">Mascotas Perdidas</h1>
 
-      {/* Componente de Filtros */}
       <Filtros onFilter={(nuevosFiltros) => setFiltros(nuevosFiltros)} />
 
-      {/* Lista de publicaciones */}
-      {mascotasFiltradas.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-          {mascotasFiltradas.map((mascota) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        {mascotasFiltradas.map((mascota) => {
+          console.log("Datos de la tarjeta:", mascota); // Verifica los datos que se pasan al componente
+          return (
             <TarjetaMascota
               key={mascota.id}
               mascota={{
                 ...mascota,
-                imagen: mascota.imagen || "/placeholder-image.jpg", // Imagen predeterminada
+                imagen: mascota.imagen || "/placeholder.jpg", // Imagen predeterminada
               }}
               onClick={() => abrirModal(mascota)}
             />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-700 mt-6">
-          No hay publicaciones disponibles.
-        </p>
-      )}
+          );
+        })}
+      </div>
 
-      {/* Modal para Detalles de Mascota */}
       {modalData && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg max-w-lg w-full">
@@ -99,7 +90,7 @@ export default function HomePage() {
               {modalData.nombreMascota || "Sin nombre"}
             </h2>
             <img
-              src={modalData.imagen || "/placeholder-image.jpg"}
+              src={modalData.imagen || "/placeholder.jpg"}
               alt={modalData.nombreMascota || "Mascota"}
               className="w-full h-64 object-cover mt-4 rounded-lg"
             />
@@ -109,7 +100,6 @@ export default function HomePage() {
               {modalData.ubicacion || "No especificada"}
             </p>
 
-            {/* Sección de comentarios */}
             <ComentariosList publicacionId={modalData.id} />
             <Comentarios
               publicacionId={modalData.id}
