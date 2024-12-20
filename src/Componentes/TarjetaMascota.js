@@ -1,20 +1,22 @@
-const TarjetaMascota = ({ mascota }) => {
-  if (!mascota) {
-    console.error("TarjetaMascota recibió datos inválidos:", mascota);
-    return null;
-  }
-
+const TarjetaMascota = ({ publicacion, onClick }) => {
+  const imagenURL = publicacion?.imagen || "/placeholder.jpg"; // URL predeterminada si no hay imagen
   return (
-    <div className="shadow-md rounded-lg overflow-hidden">
+    <div
+      className="shadow-md rounded-lg overflow-hidden cursor-pointer"
+      onClick={() => onClick(publicacion)} // Llama a la función onClick pasando los datos de la publicación
+    >
       <img
-        src={mascota.imagen || "/placeholder.jpg"}
-        alt={mascota.nombreMascota || "Imagen de la mascota"}
+        src={imagenURL}
+        alt={publicacion?.nombreMascota || "Imagen de la mascota"}
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h2 className="text-lg font-bold">{mascota.nombreMascota || "Sin nombre"}</h2>
-        <p className="text-gray-700">{mascota.descripcion || "Sin descripción"}</p>
-        <p className="text-gray-500 text-sm">{mascota.ubicacion || "Ubicación desconocida"}</p>
+        <h3 className="text-lg font-bold">
+          {publicacion?.nombreMascota || "Nombre desconocido"}
+        </h3>
+        <p className="text-sm text-gray-600">
+          {publicacion?.descripcion || "Sin descripción"}
+        </p>
       </div>
     </div>
   );
