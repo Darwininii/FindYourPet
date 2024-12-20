@@ -1,96 +1,86 @@
 /* Contenedor principal */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #f9f9f9;
-    padding: 20px;
-  }
-  
-  /* Título */
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  /* Formulario */
-  .form {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    max-width: 500px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  /* Etiquetas */
-  .label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  /* Inputs y Textareas */
-  .input,
-  .textarea,
-  .select {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .input:focus,
-  .textarea:focus,
-  .select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-  }
-  
-  /* Botón de envío */
-  .button {
-    background-color: #007bff;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Mensajes de error */
-  .error-message {
-    color: red;
-    font-size: 0.875rem;
-    text-align: center;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .form {
-      padding: 1.5rem;
-    }
-  
-    .title {
-      font-size: 1.75rem;
-    }
-  }
-  
+.registrar-mascota-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  border-radius: 20px;
+}
+
+/* Encabezado */
+.registrar-mascota-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.registrar-mascota-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: black;
+}
+
+/* Formulario */
+.registrar-mascota-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 15px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 4px 0px 1px #4b1248;
+}
+
+/* Campos de entrada */
+.registrar-mascota-input,
+.registrar-mascota-textarea,
+.registrar-mascota-file {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #264143;
+  border-radius: 4px;
+  font-size: 15px;
+  box-shadow: 1px 2px 0px 0px #a43931;
+  outline: none;
+  color: black;
+}
+
+/* Botón */
+.registrar-mascota-button {
+  padding: 15px;
+  width: 100%;
+  font-size: 15px;
+  background-image: linear-gradient(to bottom, #2c3e50, #3498db);
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #4b1248;
+  cursor: pointer;
+  color: white;
+}
+
+.registrar-mascota-button:hover {
+  background-color: rgba(158, 85, 241, 0.765);
+  opacity: 0.9;
+}
+
+/* Mensajes */
+.error-message {
+  color: #e53e3e;
+  background: #fddede;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.success-message {
+  color: #38a169;
+  background: #e6ffed;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}

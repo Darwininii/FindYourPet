@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f9f9f9;
   min-height: 100vh;
+  border-radius: 20px;
 }
 
 .perfil-header {
@@ -12,6 +12,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .perfil-foto {
@@ -19,7 +20,8 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #007bff;
+  border: 2px solid #264143;
+  box-shadow: 3px 4px 0px 1px #a43931;
 }
 
 .perfil-placeholder {
@@ -31,22 +33,27 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  color: white;
+  color: black;
+  border: 2px solid #264143;
 }
 
 .perfil-nombre {
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
-  color: #333;
+  color: black;
 }
 
 .perfil-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-width: 400px;
   gap: 15px;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 4px 0px 1px #4b1248;
 }
 
 .perfil-input,
@@ -54,28 +61,35 @@
 .perfil-textarea,
 .perfil-file {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  border: 2px solid #264143;
+  border-radius: 4px;
+  font-size: 15px;
+  box-shadow: 1px 2px 0px 0px #a43931;
+  outline: none;
+  color: black;
 }
 
 .perfil-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  padding: 15px;
+  width: 100%;
+  font-size: 15px;
+  background-image: linear-gradient(to bottom, #2c3e50, #3498db);
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #4b1248;
   cursor: pointer;
 }
 
 .perfil-button:hover {
-  background-color: #0056b3;
+  background-color: rgba(158, 85, 241, 0.765);
+  opacity: 0.9;
 }
 
 .perfil-subtitulo {
   font-size: 20px;
   margin: 20px 0;
-  color: #333;
+  color: black;
 }
 
 .perfil-publicaciones {
@@ -90,7 +104,8 @@
   background-color: white;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 4px 0px 1px rgba(0, 0, 0, 0.1);
+  border: 2px solid #264143;
 }
 
 .perfil-publicacion-titulo {

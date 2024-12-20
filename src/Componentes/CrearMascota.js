@@ -6,6 +6,7 @@ import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import Mascota from "@/Componentes/CrearMascota.css";
 
 const CrearMascota = () => {
   const [user, setUser] = useState(null);
@@ -104,13 +105,13 @@ const CrearMascota = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Registrar Mascota</h2>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      {success && <p className="text-green-500 mb-4">{success}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="registrar-mascota-container">
+      <h2 className="registrar-mascota-title">Registrar Mascota</h2>
+      {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
+      <form onSubmit={handleSubmit} className="registrar-mascota-form">
         <div>
-          <label className="block font-medium mb-1" htmlFor="nombreMascota">
+          <label className="registrar-mascota-label" htmlFor="nombreMascota">
             Nombre de la Mascota:
           </label>
           <input
@@ -120,11 +121,11 @@ const CrearMascota = () => {
             value={formData.nombreMascota}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg p-2"
+            className="registrar-mascota-input"
           />
         </div>
         <div>
-          <label className="block font-medium mb-1" htmlFor="especie">
+          <label className="registrar-mascota-label" htmlFor="especie">
             Especie:
           </label>
           <input
@@ -134,11 +135,11 @@ const CrearMascota = () => {
             value={formData.especie}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg p-2"
+            className="registrar-mascota-input"
           />
         </div>
         <div>
-          <label className="block font-medium mb-1" htmlFor="ubicacion">
+          <label className="registrar-mascota-label" htmlFor="ubicacion">
             Ubicación:
           </label>
           <input
@@ -148,11 +149,11 @@ const CrearMascota = () => {
             value={formData.ubicacion}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg p-2"
+            className="registrar-mascota-input"
           />
         </div>
         <div>
-          <label className="block font-medium mb-1" htmlFor="descripcion">
+          <label className="registrar-mascota-label" htmlFor="descripcion">
             Descripción:
           </label>
           <textarea
@@ -161,11 +162,11 @@ const CrearMascota = () => {
             value={formData.descripcion}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg p-2"
+            className="registrar-mascota-textarea"
           />
         </div>
         <div>
-          <label className="block font-medium mb-1" htmlFor="imagen">
+          <label className="registrar-mascota-label" htmlFor="imagen">
             Imagen:
           </label>
           <input
@@ -174,12 +175,12 @@ const CrearMascota = () => {
             name="imagen"
             onChange={handleChange}
             required
-            className="w-full border rounded-lg p-2"
+            className="registrar-mascota-file"
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+          className="registrar-mascota-button"
           disabled={subiendoImagen}
         >
           {subiendoImagen ? "Subiendo..." : "Registrar Mascota"}

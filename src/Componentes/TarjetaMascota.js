@@ -1,15 +1,11 @@
 const TarjetaMascota = ({ publicacion }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="shadow-md rounded-lg overflow-hidden">
       <img
-        src={publicacion.imagen || "/placeholder.jpg"} // Imagen de la mascota
-        alt={publicacion.nombreMascota}
+        src={publicacion?.imagen || "/placeholder.jpg"} // Verifica si 'imagen' existe
+        alt={publicacion?.nombreMascota || "Imagen de la mascota"} // Proporciona un valor predeterminado
         className="w-full h-48 object-cover"
       />
-      <div className="p-4">
-        <h2 className="text-lg font-bold">{publicacion.nombreMascota}</h2>
-        <p className="text-gray-600">{publicacion.descripcion}</p>
-      </div>
     </div>
   );
 };

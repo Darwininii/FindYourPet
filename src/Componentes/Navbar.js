@@ -60,7 +60,7 @@ export default function Navbar() {
             <Link href="/Mapa">Mapa</Link>
           </li>
           <li>
-            <Link href="/ayuda">Ayuda</Link>
+            <Link href="/Ayuda">Ayuda</Link>
           </li>
           <li>
             <Link href="/Donacion">Donación</Link>
